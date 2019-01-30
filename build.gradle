@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.5'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+}
+
+mainClassName = 'awsApiGateway.App'
+
+startScripts {
+    applicationName = "vtl"
+}
