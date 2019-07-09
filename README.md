@@ -1,6 +1,6 @@
 # aws-apigateway-velocity-repl
 
-REPL (read-eval-print-loop) to test Apache Velocity templates executed by API Gateway.  It includes additional [API Gateway Mapping Template Variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html) for testing purposes.
+Local Velocity Template execution environment for API Gateway.  It includes additional [API Gateway Mapping Template Variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html) for testing purposes.
 
 ```bash
 .
@@ -14,11 +14,3 @@ REPL (read-eval-print-loop) to test Apache Velocity templates executed by API Ga
 │   └── wrapper                       <-- Contains the JAR file and configuration of the Gradle Wrapper
 └── src                               <-- Java source code
 ```
-
-## Requirements
-
-TODO
-
-## Instructions
-
-TODO
