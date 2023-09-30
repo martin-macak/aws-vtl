@@ -11,10 +11,23 @@ dependencies {
     compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
     compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
+
 
 mainClassName = 'awsApiGateway.App'
 
 startScripts {
     applicationName = "vtl"
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "awsApiGateway.App"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
