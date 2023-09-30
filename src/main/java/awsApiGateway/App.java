@@ -24,7 +24,7 @@ import com.jayway.jsonpath.spi.mapper.MappingProvider;
 import awsApiGateway.mapper.ApiGatewayMapper;
 
 public class App {
-    
+
     private ApiGatewayMapper apiGatewayMapper;
 
     @SuppressWarnings("unchecked")
@@ -58,8 +58,7 @@ public class App {
     }
 
     private String prettyPrint(String source) throws IOException {
-        ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-        return mapper.writeValueAsString(mapper.readValue(source, Map.class));
+        return source;
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {

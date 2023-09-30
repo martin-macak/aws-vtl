@@ -3,11 +3,13 @@ MAKE := make
 
 GRADLE := ./gradlew
 
+SRC = $(shell find src -type f -name '*.java')
+
 all: jar
 
 jar: build/libs/aws-apigateway-velocity-repl.jar
 
-build/libs/aws-apigateway-velocity-repl.jar:
+build/libs/aws-apigateway-velocity-repl.jar: $(SRC) build.gradle
 	@$(GRADLE) jar --no-daemon
 
 dist: build/libs/aws-apigateway-velocity-repl.jar
@@ -19,6 +21,7 @@ dist: build/libs/aws-apigateway-velocity-repl.jar
 
 test:
 	@$(GRADLE) test
+	@tests/test_dist.sh
 
 .PHONY: test
 
