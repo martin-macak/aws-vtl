@@ -22,6 +22,7 @@ public class CommandLineHandler {
     private Options buildOptions() {
         options.addOption("t", true, "velocity template file");
         options.addOption("d", true, "json data file");
+        options.addOption("s", true, "json file with stage variables");
         return options;
     }
 

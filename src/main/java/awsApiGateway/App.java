@@ -27,8 +27,12 @@ public class App {
 
     private ApiGatewayMapper apiGatewayMapper;
 
-    @SuppressWarnings("unchecked")
     public App(String dataFile) throws JsonParseException, JsonMappingException, IOException {
+        this(dataFile, null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public App(String dataFile, String stageVariablesFile) throws JsonParseException, JsonMappingException, IOException {
         Configuration.setDefaults(new Configuration.Defaults() {
             private final JsonProvider jsonProvider = new JacksonJsonProvider();
             private final MappingProvider mappingProvider = new JacksonMappingProvider();
@@ -50,7 +54,13 @@ public class App {
         });
 
         Map<String, Object> data = new ObjectMapper().readValue(new File(dataFile), Map.class);
-        this.apiGatewayMapper = new ApiGatewayMapper(data);
+
+        if (stageVariablesFile != null) {
+            Map<String, Object> stageVariables = new ObjectMapper().readValue(new File(stageVariablesFile), Map.class);
+            this.apiGatewayMapper = new ApiGatewayMapper(data, stageVariables);
+        } else {
+            this.apiGatewayMapper = new ApiGatewayMapper(data);
+        }
     }
 
     private Optional<String> renderTemplate(String templateName) {
@@ -68,8 +78,9 @@ public class App {
         if (cmd.isPresent()) {
             String templateName = cmd.get().getOptionValue("t");
             String dataFile = cmd.get().getOptionValue("d");
+            String stageVariablesFile = cmd.get().getOptionValue("s");
 
-            App app = new App(dataFile);
+            App app = new App(dataFile, stageVariablesFile);
             Optional<String> result = app.renderTemplate(templateName);
             System.out.println(app.prettyPrint(result.get()));
         } else {
