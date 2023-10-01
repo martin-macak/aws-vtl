@@ -1,5 +1,7 @@
 package awsApiGateway.mapper;
 
-public class StageVariables {
+import java.util.HashMap;
+
+public class StageVariables extends HashMap<String, Object> {
 
 }

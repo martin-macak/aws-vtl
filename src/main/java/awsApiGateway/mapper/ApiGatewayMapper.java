@@ -22,6 +22,15 @@ public class ApiGatewayMapper {
         context.put("util", new Util());
     }
 
+    public ApiGatewayMapper(Map<String, Object> data,
+                            Map<String, Object> stageVariables) {
+        this.context = new VelocityContext();
+        context.put("input", new Input(data));
+        context.put("context", new Context());
+        context.put("stageVariables", stageVariables);
+        context.put("util", new Util());
+    }
+
     public Optional<String> renderTemplate(String templateName) {
         String resDir = new File(templateName).getParentFile().getAbsolutePath();
         String tplFile = new File(templateName).getName();
