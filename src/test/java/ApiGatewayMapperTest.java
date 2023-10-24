@@ -42,4 +42,25 @@ public class ApiGatewayMapperTest {
         String val = got.get();
         assert (val.equals("dev"));
     }
+
+    @Test
+    public void testRenderTemplate_withNullAndInputJson() {
+        HashMap<String, Object> data = new HashMap<>();
+
+        HashMap<String, Object> stageVariables = new HashMap<>();
+
+        ApiGatewayMapper mapper = new ApiGatewayMapper(data, stageVariables);
+        URL resource = this.getClass().getResource("test_template3.vt");
+        assert (resource != null);
+
+        String templatePath = resource.getFile();
+
+        Optional<String> got = mapper.renderTemplate(templatePath);
+        assert (got.isPresent());
+        String val = got.get();
+        assert (val.equals("{\n" +
+                "  \"contracts\": null,\n" +
+                "  \"nextToken\": null\n" +
+                "}\n"));
+    }
 }

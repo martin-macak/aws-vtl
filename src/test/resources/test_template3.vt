@@ -1,0 +1,4 @@
+{
+  "contracts": $input.json('$.contracts'),
+  "nextToken": $input.json('$.nextToken')
+}
