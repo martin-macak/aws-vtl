@@ -1,5 +1,6 @@
 package awsApiGateway.mapper;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Option;
+import com.jayway.jsonpath.PathNotFoundException;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.json.JsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
@@ -29,7 +31,15 @@ public class Input {
     }
 
     public String json(String expression) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(path(expression));
+        Object input = null;
+        try {
+            input = path(expression);
+        } catch (PathNotFoundException pnfe) {
+            // ignore
+        }
+
+        String result = objectMapper.writeValueAsString(input);
+        return result;
     }
 
     @SuppressWarnings("unchecked")
