@@ -1,5 +1,6 @@
 import awsApiGateway.mapper.ApiGatewayMapper;
 import org.junit.Test;
+import org.junit.Assert;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -58,9 +59,9 @@ public class ApiGatewayMapperTest {
         Optional<String> got = mapper.renderTemplate(templatePath);
         assert (got.isPresent());
         String val = got.get();
-        assert (val.equals("{\n" +
+        Assert.assertEquals(val, "{\n" +
                 "  \"contracts\": null,\n" +
                 "  \"nextToken\": null\n" +
-                "}\n"));
+                "}\n");
     }
 }

@@ -52,7 +52,13 @@ public class Input {
     }
 
     public Object path(String expression) {
-        return jsonPathRunner.read(data, expression);
+        Object input = null;
+        try {
+            input = jsonPathRunner.read(data, expression);
+         } catch (PathNotFoundException pnfe) {
+            // ignore
+        }
+        return input;
     }
 
     private class JsonPathRunner {
