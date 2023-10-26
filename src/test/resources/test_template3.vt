@@ -1,4 +1,7 @@
 {
   "contracts": $input.json('$.contracts'),
   "nextToken": $input.json('$.nextToken')
+#if($input.path('$.nonexistent'))
+  ,"nonexistent": $input.path('$.nonexistent'),
+#end
 }
